@@ -1,0 +1,30 @@
+main {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: normal;
+}
+
+label {
+    display: flex;
+    justify-content: flex-start;
+}
+
+textarea {
+  display: flex;
+  justify-content: flex-start;
+  background-color: transparent;
+  width: 100%;
+  /* box-sizing: border-box; */
+   border: none;
+  border-bottom: 4px solid rgb(0, 0, 0);
+}
+
+.foot {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Bungee', sans-serif;
+}
+
+button {
+    color: cornsilk;
+    background-color: #4056A1;
+}

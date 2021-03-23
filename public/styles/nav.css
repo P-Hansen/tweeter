@@ -1,0 +1,28 @@
+nav {
+    background-color: #4056A1;
+    color: #FFFFFF;
+    min-height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: 'Bungee', sans-serif;
+}
+span {
+    margin: 1.5em;
+}
+.right {
+    display: flex;
+    flex-direction: column;
+}
+h4 {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: lighter;
+    margin: 1.5em;
+    margin-bottom: 0;
+}
+.arrow {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    color: red;
+}
