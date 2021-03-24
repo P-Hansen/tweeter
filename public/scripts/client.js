@@ -5,8 +5,41 @@
  */
 $(document).ready(function() {
 
-    const createTweetElement = function(tweetData) {
+    //get me that array of tweets from the server
+    const getTweetsFromServer = function() {
+        $.ajax({
+            url: "/tweets/",
+            method: "GET",
+        }).then(function (newShit) {
+            renderTweets(newShit);
+        });
+    }
+    getTweetsFromServer();
 
+    //on form submit shove that tweet into the server
+    $("form").on("submit", function(event) {
+        event.preventDefault();
+        let formData = $(this).serialize();
+        let slicedFormData = formData.slice(5);
+        if (slicedFormData.length > 0 && slicedFormData.length <= 140) {
+            console.log("submitted:",slicedFormData,"length:",slicedFormData.length);
+            $.ajax({
+                url: "/tweets/",
+                type: "POST",
+                data: formData,
+                datatype: "json"
+            }).then(()=>{
+                console.log("I did the thing");
+                $('#tweet-container').empty();
+                getTweetsFromServer();
+            });
+        } else {
+            alert("Bad tweet");
+        }
+    });
+
+    //create nicly formatted HTML of my tweet
+    const createTweetElement = function(tweetData) {
         const $tweet = $(`<br><article class="tweet"><label id="tweet-header">
         <div class="left-header">
           <img src="${tweetData.user.avatars}">
@@ -27,37 +60,11 @@ $(document).ready(function() {
         return $tweet
     };
 
-    // Test / driver code (temporary). Eventually will get this from the server.
-    const data = [
-        {
-          "user": {
-            "name": "Newton",
-            "avatars": "https://i.imgur.com/73hZDYK.png"
-            ,
-            "handle": "@SirIsaac"
-          },
-          "content": {
-            "text": "If I have seen further it is by standing on the shoulders of giants"
-          },
-          "created_at": 1461116232227
-        },
-        {
-          "user": {
-            "name": "Descartes",
-            "avatars": "https://i.imgur.com/nlhLi3I.png",
-            "handle": "@rd" },
-          "content": {
-            "text": "Je pense , donc je suis"
-          },
-          "created_at": 1461113959088
-        }
-      ]
+    //take an array of tweets and put them into the DOM
+    const renderTweets = function(tweets) {
+      for (const chunks in tweets) {
+        $('#tweet-container').append(createTweetElement(tweets[chunks]));
+      };
+    };
       
-      const renderTweets = function(tweets) {
-        for (const chunks in tweets) {
-          $('#tweet-container').append(createTweetElement(tweets[chunks]));
-        }
-      }
-      
-      renderTweets(data);
 });
