@@ -9,8 +9,12 @@ $(document).ready(function() {
         counterText.text(charCount);
         if (charCount < 0) {
             counterText.addClass("newColour");
+            counterText.removeClass("rainbow");
+        } else if (charCount === 0) {
+            counterText.addClass("rainbow");
         } else {
             counterText.removeClass("newColour");
+            counterText.removeClass("rainbow");
         }
     });
   });
