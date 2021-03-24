@@ -29,6 +29,7 @@ button {
     background-color: #4056A1;
 }
 
+/* when you go over 140 char */
 .newColour {
     color: red;
 }
