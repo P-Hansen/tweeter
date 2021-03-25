@@ -18,6 +18,10 @@ main {
     font-weight: normal;
 }
 
+.new-tweet {
+    display: none;
+}
+
 label {
     display: flex;
     justify-content: flex-start;

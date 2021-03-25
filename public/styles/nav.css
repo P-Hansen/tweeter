@@ -1,8 +1,9 @@
 nav {
     position: fixed;
     width: 100%;
-    background-color: #4056A1;
     color: #FFFFFF;
+    background-color: #cc8800;
+    background-image: url("https://www.transparenttextures.com/patterns/asfalt-light.png");
     min-height: 120px;
     display: flex;
     align-items: center;
@@ -28,4 +29,18 @@ h4 {
     justify-content: center;
     align-items: flex-start;
     color: red;
+
+}
+
+/*from: https://css-tricks.com/making-css-animations-feel-natural/ */
+.right:hover > .arrow {
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-name: bounce;
+    animation-timing-function: ease-in-out;
+}
+@keyframes bounce {
+    0%   { transform: translateY(0); }
+    50%  { transform: translateY(10px); }
+    100% { transform: translateY(0); }
 }
