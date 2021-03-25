@@ -19,23 +19,25 @@ $(document).ready(function() {
     //on form submit shove that tweet into the server
     $("form").on("submit", function(event) {
         event.preventDefault();
+        let textBoxText = $("#tweet-text").val();
         let formData = $(this).serialize();
-        if ($("#tweet-text").length > 140) {
-            $('#error-box').text("Error too mant characters!").slideDown().delay(2000).slideUp();
-        } else if ($("#tweet-text").length <= 0) {
-            $('#error-box').text("Error empty tweet!").slideDown().delay(2000).slideUp();
+        if (textBoxText.length > 140) {
+            $('#error-box').text("⚠ Error too many characters! ⚠").slideDown().delay(2000).slideUp();
+        } else if (textBoxText.length <= 0 || textBoxText.length === undefined) {
+            $('#error-box').text("⚠ Error empty tweet! ⚠").slideDown().delay(2000).slideUp();
         } else {
-            console.log("submitted:",$("#tweet-text"),"length:",$("#tweet-text").length);
+            //console.log("submitted:",textBoxText,"length:",textBoxText.length);
             $.ajax({
                 url: "/tweets/",
                 type: "POST",
                 data: formData,
                 datatype: "json"
             }).then(()=>{
-                console.log("I did the thing");
+                //clear the tweets and get them all again
                 $('#tweet-container').empty();
                 getTweetsFromServer();
             }).then(()=>{
+                //reset text box
                 this.reset();
             });
             $('#error-box').slideUp();
