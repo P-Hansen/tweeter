@@ -20,9 +20,12 @@ $(document).ready(function() {
     $("form").on("submit", function(event) {
         event.preventDefault();
         let formData = $(this).serialize();
-        let slicedFormData = formData.slice(5);
-        if (slicedFormData.length > 0 && slicedFormData.length <= 140) {
-            console.log("submitted:",slicedFormData,"length:",slicedFormData.length);
+        if ($("#tweet-text").length > 140) {
+            $('#error-box').text("Error too mant characters!").slideDown().delay(2000).slideUp();
+        } else if ($("#tweet-text").length <= 0) {
+            $('#error-box').text("Error empty tweet!").slideDown().delay(2000).slideUp();
+        } else {
+            console.log("submitted:",$("#tweet-text"),"length:",$("#tweet-text").length);
             $.ajax({
                 url: "/tweets/",
                 type: "POST",
@@ -32,22 +35,29 @@ $(document).ready(function() {
                 console.log("I did the thing");
                 $('#tweet-container').empty();
                 getTweetsFromServer();
+            }).then(()=>{
+                this.reset();
             });
-        } else {
-            alert("Bad tweet");
+            $('#error-box').slideUp();
         }
     });
 
-    //create nicly formatted HTML of my tweet
+    //wraps text in divs to escape melicious text
+    const escape = (text) => {
+        const escapedText = $("<div>").text(text);
+        return escapedText[0];
+    };
+
+    //create nicely formatted HTML of my tweet
     const createTweetElement = function(tweetData) {
         const $tweet = $(`<br><article class="tweet"><label id="tweet-header">
         <div class="left-header">
-          <img src="${tweetData.user.avatars}">
-          <p>${tweetData.user.name}</p>
+          <img src="${$(escape(tweetData.user.avatars)).html()}">
+          <p>${$(escape(tweetData.user.name)).html()}</p>
         </div>
-          <p id="handle">${tweetData.user.handle}</p>
+          <p id="handle">${$(escape(tweetData.user.handle)).html()}</p>
       </label>
-      <q>${tweetData.content.text}</q>
+      <q>${$(escape(tweetData.content.text)).html()}</q>
       <br>
       <footer>
         <time>${tweetData.created_at}</time>

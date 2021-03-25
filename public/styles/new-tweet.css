@@ -1,3 +1,18 @@
+#error-box{
+    display: none;
+    justify-content: center;
+    border: red;
+    color: red;
+    border-style: solid;
+    padding: 10px;
+    width: 50%;
+    margin-left: 25%;
+    margin-right: 25%;
+    margin-top: 1%;
+    font-family: 'Source Sans Pro', sans-serif;
+    text-align: center;
+}
+
 main {
     font-family: 'Source Sans Pro', sans-serif;
     font-weight: normal;
@@ -36,13 +51,24 @@ button {
 
 /* at 140 char */
 .rainbow{
-    animation:blinkingText 1.5s infinite;
+    animation:rainbow 1.5s infinite;
 }
-@keyframes blinkingText{
+@keyframes rainbow{
     0%{     color: red;    }
     20%{    color: orange; }
     40%{    color: yellow; }
     60%{    color: green;  }
     80%{    color: blue;   }
     100%{   color: purple; }
+}
+
+.blinking{
+    animation:blinkingText 1.2s infinite;
+}
+@keyframes blinkingText{
+    0%{     color: #000;    }
+    49%{    color: #000; }
+    60%{    color: transparent; }
+    99%{    color:transparent;  }
+    100%{   color: #000;    }
 }
