@@ -39,7 +39,6 @@ $(document).ready(function() {
         } else if (textBoxText.length <= 0 || textBoxText.length === undefined) {
             $('#error-box').text("⚠ Error empty tweet! ⚠").slideDown().delay(2000).slideUp();
         } else {
-            //console.log("submitted:",textBoxText,"length:",textBoxText.length);
             $.ajax({
                 url: "/tweets/",
                 type: "POST",
@@ -51,6 +50,7 @@ $(document).ready(function() {
                 getTweetsFromServer();
             }).then(()=>{
                 //reset text box
+                $(".counter").text(140);
                 this.reset();
             });
             $('#error-box').slideUp();
