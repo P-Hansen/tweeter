@@ -32,9 +32,13 @@ h4 {
 
 }
 
+.right:hover {
+    cursor: pointer;
+}
+
 /*from: https://css-tricks.com/making-css-animations-feel-natural/ */
 .right:hover > .arrow {
-    animation-duration: 2s;
+    animation-duration: 1s;
     animation-iteration-count: infinite;
     animation-name: bounce;
     animation-timing-function: ease-in-out;
